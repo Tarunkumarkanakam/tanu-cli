@@ -6,7 +6,7 @@ import typer
 from getpass import getpass
 
 CONFIG_FILE = "tanu_cli_config.ini"
-SALT = b'lisdfsbdflkjb68416fs5b1s6f5b1'  # Use a secure salt value, ideally generated with os.urandom
+SALT = b'lisdfsbdflkjb68416fs5b1s6f5b1' 
 
 def create_config():
     config = configparser.ConfigParser()

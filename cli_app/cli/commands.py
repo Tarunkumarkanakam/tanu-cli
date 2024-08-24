@@ -59,7 +59,7 @@ def password(id: str):
             return
     typer.echo(f"No password found with ID {id}.")
 
-# Register the 'password' subcommands under the main app
+
 app.add_typer(password_app, name="password")
 
 @app.command("edit-user")
@@ -68,5 +68,5 @@ def edit_user():
     edit_user_details()
 
 if __name__ == "__main__":
-    ensure_setup()  # Ensure setup is done every time the app runs
+    ensure_setup() 
     app()
