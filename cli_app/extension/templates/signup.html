@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .signup-container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); max-width: 400px; width: 100%; }
+        .signup-container h1 { margin-bottom: 20px; font-size: 24px; color: #333; text-align: center; }
+        .signup-container input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .signup-container input[type="submit"] { background-color: #28a745; color: white; cursor: pointer; }
+        .signup-container input[type="submit"]:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        <form id="signup-form" action="/welcome">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Sign Up">
+        </form>
+    </div>
+    <script>
+        document.getElementById('signup-form').onsubmit = function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            fetch('http://localhost:5000/passwords', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ site: window.location.hostname, username: username, password: password })
+            }).then(response => response.json()).then(data => {
+                console.log('Password saved:', data);
+                window.location.href = '/welcome';
+            });
+        }
+    </script>
+</body>
+</html>

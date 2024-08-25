@@ -44,7 +44,7 @@ def rm(password_id: str):
         typer.echo(f"No password found with ID {password_id}.")
 
 @password_app.command()
-def password(id: str):
+def show(id: str):
     """View a specific password by ID."""
     prompt_for_master_password()  # Require master password for access
     config = load_config()

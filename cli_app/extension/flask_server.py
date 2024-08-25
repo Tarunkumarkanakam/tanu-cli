@@ -3,19 +3,39 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.storage import store_password, retrieve_all_passwords, delete_password_by_id
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 from utils.storage import retrieve_all_passwords, delete_password_by_id, store_password
 from utils.encryption import encrypt, decrypt
 from utils.config import hash_password, load_config
 import binascii
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 def get_encryption_key():
     config = load_config()
     master_password_hash = config['USER']['master_password_hash']
     key = binascii.unhexlify(master_password_hash)
     return key
+
+
+@app.route('/')
+def index():
+    return "Password Manager API is running."
+
+# Serve the test HTML files
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/welcome')
+def welcome():
+    return render_template('welcome.html')
 
 @app.route('/passwords', methods=['GET'])
 def list_passwords():
