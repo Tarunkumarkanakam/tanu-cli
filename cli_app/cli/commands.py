@@ -62,8 +62,8 @@ def show(id: str):
 
 app.add_typer(password_app, name="password")
 
-@app.command("edit-user")
-def edit_user():
+@app.command("setup")
+def setup():
     """Edit user details and master password."""
     edit_user_details()
 
